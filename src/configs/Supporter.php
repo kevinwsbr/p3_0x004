@@ -24,6 +24,21 @@ class Supporter {
 
     }
 
+    public function getData() {
+        try {
+            $sql='SELECT * FROM `supporters` WHERE `ID` = :ID;';
+            $db=$this->db->prepare($sql);
+            $db->bindValue(':ID', $_GET['id'], PDO::PARAM_STR);
+
+            $db->execute();
+
+            return $db->fetch(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            echo 'Ops, aconteceu o seguinte erro: ' . $e->getMessage();
+        }
+
+    }
+
     public function getSupportersCount() {
         try {
             $sql='SELECT * FROM `supporters`;';
@@ -67,6 +82,22 @@ class Supporter {
             echo 'Ops, aconteceu o seguinte erro: ' . $e->getMessage();
         }
 
+    }
+
+    public function update() {
+        if ($_SERVER['REQUEST_METHOD']=='POST') {
+
+            $sql='UPDATE `supporters` SET `category` = :category, `status` = :status WHERE `ID` = :ID;';
+
+            $db=$this->db->prepare($sql);
+
+            $db->bindValue(':category', $_POST['category'], PDO::PARAM_STR);
+            $db->bindValue(':status', $_POST['status'], PDO::PARAM_STR);
+            $db->bindValue(':ID', $_GET['id'], PDO::PARAM_STR);
+
+            $db->execute();
+            header('Location: index.php');
+        }
     }
 
     public function register()

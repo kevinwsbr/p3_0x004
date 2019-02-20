@@ -1,6 +1,7 @@
 <?php
 
 require_once 'configs/Autoload.php';
+
 $utils->protectPage();
 $employee = new Employee($db);
 $teamBus = new Bus($db);
@@ -83,33 +84,49 @@ $supportersList = $supporter->getSupporters();
               <span class="d-block">Número de sócios: <?=$supporter->getSupportersCount()?></span>
               <span class="d-block">Número de sócios adimplentes: <?=$supporter->getAdSupportersCount()?></span>
               <span class="d-block mb-3">Número de sócios inadimplentes: <?=$supporter->getInadSupportersCount()?></span>
-              <table class="table">
-                  <thead class="thead-dark">
-                  <tr>
-                      <th scope="col">Nome</th>
-                      <th scope="col">CPF</th>
-                      <th scope="col">E-mail</th>
-                      <th scope="col">Telefone</th>
-                      <th scope="col">Endereço</th>
-                      <th scope="col">Categoria</th>
-                      <th scope="col">Status</th>
+              <?php
 
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php foreach($supportersList as $sup) { ?>
+              if (count($supportersList) != 0) {
+              ?>
+                  <table class="table">
+                      <thead class="thead-dark">
                       <tr>
-                          <td><?=$sup['name']; ?></td>
-                          <td><?=$sup['CPF']; ?></td>
-                          <td><?=$sup['email']; ?></td>
-                          <td><?=$sup['phone']; ?></td>
-                          <td><?=$sup['address']; ?></td>
-                          <td><?=$sup['category']; ?></td>
-                          <td><?=$sup['status']; ?></td>
+                          <th scope="col">Nome</th>
+                          <th scope="col">CPF</th>
+                          <th scope="col">E-mail</th>
+                          <th scope="col">Telefone</th>
+                          <th scope="col">Endereço</th>
+                          <th scope="col">Categoria</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Ações</th>
+
                       </tr>
-                  <?php } ?>
-                  </tbody>
-              </table>
+                      </thead>
+                      <tbody>
+                      <?php foreach($supportersList as $sup) { ?>
+                          <tr>
+                              <td><?=$sup['name']; ?></td>
+                              <td><?=$sup['CPF']; ?></td>
+                              <td><?=$sup['email']; ?></td>
+                              <td><?=$sup['phone']; ?></td>
+                              <td><?=$sup['address']; ?></td>
+                              <td><?=$sup['category']; ?></td>
+                              <td><?php
+                                  if($sup['status'] == 'AD') {
+                                      echo 'Adimplente';
+                                  }else if($sup['status'] == 'INAD') {
+                                      echo 'Inadimplente';
+                                  }
+                                  ?></td>
+                              <td><a href="alterar-socio.php?id=<?=$sup['ID']?>">Alterar sócio</a></td>
+                          </tr>
+                      <?php } ?>
+                      </tbody>
+                  </table>
+              <?php
+              }
+              ?>
+
               <h4 class="mt-5">Time</h4>
               <h5>Técnicos</h5>
               <table class="table">
@@ -136,6 +153,13 @@ $supportersList = $supporter->getSupporters();
                   </tbody>
               </table>
               <h5>Jogadores</h5>
+              <?php
+
+              if(count($playersList) == 0) {
+                  echo '<span class="d-block">Não há jogadores cadastrados!</span>';
+              }else {
+              ?>
+
               <table class="table">
                   <thead class="thead-dark">
                   <tr>
@@ -163,8 +187,20 @@ $supportersList = $supporter->getSupporters();
                   <?php } ?>
                   </tbody>
               </table>
+                  <?php
+              }
+
+
+              ?>
 
               <h5>Demais funcionários</h5>
+
+              <?php
+
+              if(count($employeesList) == 0) {
+                  echo '<span class="d-block">Não há funcionários cadastrados!</span>';
+              }else {
+              ?>
               <table class="table">
                   <thead class="thead-dark">
                   <tr>
@@ -191,12 +227,24 @@ $supportersList = $supporter->getSupporters();
                   <?php } } ?>
                   </tbody>
               </table>
+                  <?php
+              }
+
+
+              ?>
+
           </div>
       </div>
       <div class="row">
           <div class="col">
               <h4 class="mt-5">Recursos Físicos</h4>
               <h5>Ônibus</h5>
+              <?php
+
+              if(count($busList) == 0) {
+                  echo '<span class="d-block">Não existem ônibus cadastrados!</span>';
+              }else {
+              ?>
               <table class="table">
                   <thead class="thead-dark">
                   <tr>
@@ -218,7 +266,18 @@ $supportersList = $supporter->getSupporters();
                   <?php } ?>
                   </tbody>
               </table>
+                  <?php
+              }
+
+
+              ?>
               <h5>Estádios</h5>
+              <?php
+
+              if(count($stadiumsList) == 0) {
+                  echo '<span class="d-block">Não há estádios cadastrados!</span>';
+              }else {
+              ?>
               <table class="table">
                   <thead class="thead-dark">
                   <tr>
@@ -228,6 +287,7 @@ $supportersList = $supporter->getSupporters();
                       <th scope="col">Banheiros</th>
                       <th scope="col">Lanchonetes</th>
                       <th scope="col">Status</th>
+                      <th scope="col">Ações</th>
 
                   </tr>
                   </thead>
@@ -240,11 +300,23 @@ $supportersList = $supporter->getSupporters();
                           <td><?=$sl['restrooms']; ?></td>
                           <td><?=$sl['snack_bars']; ?></td>
                           <td><?=$sl['status']; ?></td>
+                          <td><a href="alterar-estadio.php?id=<?=$sl['ID']?>">Alterar estádio</a></td>
                       </tr>
                   <?php } ?>
                   </tbody>
               </table>
+                  <?php
+              }
+
+
+              ?>
               <h5>Centros de Treinamento</h5>
+              <?php
+
+              if(count($tcList) == 0) {
+                  echo '<span class="d-block">Não há CTs cadastrados!</span>';
+              }else {
+              ?>
               <table class="table">
                   <thead class="thead-dark">
                   <tr>
@@ -266,6 +338,11 @@ $supportersList = $supporter->getSupporters();
                   <?php } ?>
                   </tbody>
               </table>
+                  <?php
+              }
+
+
+              ?>
           </div>
       </div>
   </div>

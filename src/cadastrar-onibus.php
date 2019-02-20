@@ -2,16 +2,10 @@
 
 require_once 'configs/Autoload.php';
 
-//$utils->protectPage();
-//
-//$user = new User($db);
-//$group = new Group($db);
+$utils->protectPage();
 
 $bus = new Bus($db);
 $bus->register();
-//
-//$user->setData($user->getUser($_SESSION['user']['username']));
-//$group->register();
 
 ?>
 

@@ -2,15 +2,10 @@
 
 require_once 'configs/Autoload.php';
 
-//$utils->protectPage();
-//
-//$user = new User($db);
-//$group = new Group($db);
+$utils->protectPage();
+
 $player = new Player($db);
 $player->register("PLAYER");
-//
-//$user->setData($user->getUser($_SESSION['user']['username']));
-//$group->register();
 
 ?>
 

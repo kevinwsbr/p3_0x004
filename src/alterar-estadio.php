@@ -4,8 +4,9 @@ require_once 'configs/Autoload.php';
 
 $utils->protectPage();
 
-$supporter = new Supporter($db);
-$supporter->register();
+$stadium = new Stadium($db);
+$st = $stadium->getStadium();
+$stadium->update();
 
 ?>
 
@@ -18,7 +19,7 @@ $supporter->register();
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
-  <title>Cadastrar Sócio | iSoccer</title>
+  <title>Alterar Estádio | iSoccer</title>
 </head>
 
 <body>
@@ -26,31 +27,25 @@ $supporter->register();
   <div class="container">
       <div class="row">
           <div class="col">
-              <h3>Cadastrar Sócio</h3>
+              <h3>Alterar Estádio</h3>
               <hr/>
           </div>
       </div>
       <div class="row">
 
           <div class="col">
-              <form action="cadastrar-socio.php" method="POST">
+              <form action="alterar-estadio.php?id=<?=$st['ID']?>" method="POST">
                   <div class="row">
                       <div class="col">
                           <div class="form-group">
                               <label for="name">Nome</label>
-                              <input required type="text" class="form-control" id="name" name="name">
+                              <input disabled type="text" class="form-control" id="name" name="name" value="<?=$st['name']?>">
                           </div>
                       </div>
-                      <div class="col">
+                      <div class="col col-8">
                           <div class="form-group">
-                              <label for="email">E-mail</label>
-                              <input required type="text" class="form-control" id="email" name="email">
-                          </div>
-                      </div>
-                      <div class="col">
-                          <div class="form-group">
-                              <label for="CPF">CPF</label>
-                              <input required type="text" class="form-control" id="CPF" name="CPF">
+                              <label for="address">Endereço</label>
+                              <input disabled type="text" class="form-control" id="address" name="address" value="<?=$st['address']?>">
                           </div>
                       </div>
                   </div>
@@ -58,38 +53,34 @@ $supporter->register();
                   <div class="row">
                       <div class="col">
                           <div class="form-group">
-                              <label for="address">Endereço</label>
-                              <input required type="text" class="form-control" id="address" name="address">
+                              <label for="capacity">Capacidade total</label>
+                              <input type="text" class="form-control" id="capacity" name="capacity" value="<?=$st['capacity']?>">
                           </div>
                       </div>
                       <div class="col">
                           <div class="form-group">
-                              <label for="phone">Telefone</label>
-                              <input required type="text" class="form-control" id="phone" name="phone">
+                              <label for="restrooms">Nº de banheiros</label>
+                              <input type="text" class="form-control" id="restrooms" name="restrooms" value="<?=$st['restrooms']?>">
                           </div>
                       </div>
                       <div class="col">
                           <div class="form-group">
-                              <label for="category">Categoria</label>
-                              <select class="form-control" id="category" name="category">
-                                  <option value="JUNIOR">Júnior - R$15</option>
-                                  <option value="SENIOR">Sênior - R$30</option>
-                                  <option value="ELITE">Elite - R$50</option>
-                              </select>
+                              <label for="snack_bars">Nº de lanchonetes</label>
+                              <input type="text" class="form-control" id="snack_bars" name="snack_bars" value="<?=$st['snack_bars']?>">
                           </div>
                       </div>
                       <div class="col">
                           <div class="form-group">
                               <label for="status">Status</label>
-                              <select class="form-control" id="status" name="status">
-                                  <option value="AD">Adimplente</option>
-                                  <option value="INAD">Inadimplente</option>
+                              <select disabled class="form-control" id="status" name="status">
+                                  <option>Disponível</option>
+                                  <option>Indisponível</option>
                               </select>
                           </div>
                       </div>
                   </div>
 
-                  <button type="submit" class="btn btn-primary">Cadastrar</button>
+                  <button type="submit" class="btn btn-primary">Atualizar</button>
               </form>
           </div>
       </div>

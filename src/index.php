@@ -128,6 +128,12 @@ $supportersList = $supporter->getSupporters();
               ?>
 
               <h4 class="mt-5">Time</h4>
+              <?php
+
+              if(count($coachesList) == 0) {
+                  echo '<span class="d-block">Não há técnicos cadastrados!</span>';
+              }else {
+              ?>
               <h5>Técnicos</h5>
               <table class="table">
                   <thead class="thead-dark">
@@ -152,6 +158,11 @@ $supportersList = $supporter->getSupporters();
                   <?php } ?>
                   </tbody>
               </table>
+                  <?php
+              }
+
+
+              ?>
               <h5>Jogadores</h5>
               <?php
 
@@ -314,7 +325,7 @@ $supportersList = $supporter->getSupporters();
               <?php
 
               if(count($tcList) == 0) {
-                  echo '<span class="d-block">Não há CTs cadastrados!</span>';
+                  echo '<span class="d-block mb-5">Não há CTs cadastrados!</span>';
               }else {
               ?>
               <table class="table">

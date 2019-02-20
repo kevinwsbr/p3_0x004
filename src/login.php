@@ -17,7 +17,7 @@ $user->login();
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
-  <title>Login | iFace</title>
+  <title>Login | iSoccer</title>
 </head>
 
 <body>

@@ -7,7 +7,7 @@ require_once 'configs/Autoload.php';
 //$user = new User($db);
 //$group = new Group($db);
 $player = new Player($db);
-$player->register();
+$player->register("PLAYER");
 //
 //$user->setData($user->getUser($_SESSION['user']['username']));
 //$group->register();

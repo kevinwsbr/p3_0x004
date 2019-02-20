@@ -80,6 +80,9 @@ $supportersList = $supporter->getSupporters();
       <div class="row">
           <div class="col">
               <h5>Sócios-torcedores</h5>
+              <span class="d-block">Número de sócios: <?=$supporter->getSupportersCount()?></span>
+              <span class="d-block">Número de sócios adimplentes: <?=$supporter->getAdSupportersCount()?></span>
+              <span class="d-block mb-3">Número de sócios inadimplentes: <?=$supporter->getInadSupportersCount()?></span>
               <table class="table">
                   <thead class="thead-dark">
                   <tr>

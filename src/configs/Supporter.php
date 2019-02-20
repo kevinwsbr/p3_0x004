@@ -24,6 +24,51 @@ class Supporter {
 
     }
 
+    public function getSupportersCount() {
+        try {
+            $sql='SELECT * FROM `supporters`;';
+
+            $db=$this->db->prepare($sql);
+
+            $db->execute();
+
+            return $db->rowCount();
+        } catch(PDOException $e) {
+            echo 'Ops, aconteceu o seguinte erro: ' . $e->getMessage();
+        }
+
+    }
+
+    public function getAdSupportersCount() {
+        try {
+            $sql='SELECT * FROM `supporters` WHERE `status` = "AD";';
+
+            $db=$this->db->prepare($sql);
+
+            $db->execute();
+
+            return $db->rowCount();
+        } catch(PDOException $e) {
+            echo 'Ops, aconteceu o seguinte erro: ' . $e->getMessage();
+        }
+
+    }
+
+    public function getInadSupportersCount() {
+        try {
+            $sql='SELECT * FROM `supporters` WHERE `status` = "INAD";';
+
+            $db=$this->db->prepare($sql);
+
+            $db->execute();
+
+            return $db->rowCount();
+        } catch(PDOException $e) {
+            echo 'Ops, aconteceu o seguinte erro: ' . $e->getMessage();
+        }
+
+    }
+
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD']=='POST') {

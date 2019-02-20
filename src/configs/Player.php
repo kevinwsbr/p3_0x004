@@ -7,7 +7,7 @@ class Player extends Employee
         parent::__construct($db);
     }
 
-    public function register()
+    public function register($role)
     {
         if ($_SERVER['REQUEST_METHOD']=='POST') {
             try {
